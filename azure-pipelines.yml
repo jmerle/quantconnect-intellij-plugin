@@ -1,9 +1,22 @@
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  GRADLE_USER_HOME: $(Pipeline.Workspace)/.gradle
+
 steps:
-  - script: ./gradlew ktlintCheck
+  - task: Cache@2
+    displayName: Set-up Gradle build cache
+    inputs:
+      key: 'gradle | "$(Agent.OS)"'
+      restoreKeys: gradle
+      path: $(GRADLE_USER_HOME)
+
+  - script: ./gradlew --build-cache ktlintCheck
     displayName: Lint
 
-  - script: ./gradlew buildPlugin
+  - script: ./gradlew --build-cache buildPlugin
     displayName: Build
+
+  - script: ./gradlew --stop
+    displayName: Stop Gradle daemon
