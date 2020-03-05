@@ -1,0 +1,9 @@
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - script: ./gradlew ktlintCheck
+    displayName: Lint
+
+  - script: ./gradlew buildPlugin
+    displayName: Build

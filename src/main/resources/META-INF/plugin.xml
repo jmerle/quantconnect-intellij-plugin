@@ -1,0 +1,23 @@
+<!-- See https://www.jetbrains.org/intellij/sdk/docs/basics/plugin_structure/plugin_configuration_file.html -->
+<idea-plugin url="https://github.com/jmerle/quantconnect-intellij-plugin">
+    <id>com.jaspervanmerle.qcij</id>
+    <name>QuantConnect for IntelliJ</name>
+    <vendor email="jaspervmerle@gmail.com" url="https://jaspervanmerle.com">Jasper van Merle</vendor>
+
+    <description><![CDATA[
+    QuantConnect for IntelliJ is an unofficial QuantConnect plugin for IntelliJ-based IDE's like Rider and PyCharm which provides tight integration between the IDE and QuantConnect. It provides a cross-platform alternative to the official Visual Studio plugin. Its main features are file syncing and running backtests from inside the IDE.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- TODO: Add tool windows -->
+    </extensions>
+
+    <actions>
+        <action id="com.jaspervanmerle.qcij.HelloWorldAction" class="com.jaspervanmerle.qcij.HelloWorldAction"
+                text="Hello World Action" description="Shows a Hello World popup">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
