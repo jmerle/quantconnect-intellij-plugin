@@ -11,13 +11,28 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- TODO: Add tool windows -->
+        <!-- TODO(jmerle): Create tool windows -->
     </extensions>
 
+    <!-- idea-version attribute is added by the patchPluginXml Gradle task -->
+    <!--suppress PluginXmlValidity -->
+    <applicationListeners>
+        <listener class="com.jaspervanmerle.qcij.FileListener"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+    </applicationListeners>
+
     <actions>
-        <action id="com.jaspervanmerle.qcij.HelloWorldAction" class="com.jaspervanmerle.qcij.HelloWorldAction"
-                text="Hello World Action" description="Shows a Hello World popup">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        <group id="com.jaspervanmerle.qcij.action.ActionGroup" text="QuantConnect" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+        <action id="com.jaspervanmerle.qcij.action.SyncAction" class="com.jaspervanmerle.qcij.action.SyncAction"
+                text="Sync" description="Synchronize projects and libraries">
+            <add-to-group group-id="com.jaspervanmerle.qcij.action.ActionGroup" anchor="last"/>
+        </action>
+        <action id="com.jaspervanmerle.qcij.action.RunBacktestAction"
+                class="com.jaspervanmerle.qcij.action.RunBacktestAction" text="Run Backtest"
+                description="Run a backtest">
+            <add-to-group group-id="com.jaspervanmerle.qcij.action.ActionGroup" anchor="last"/>
         </action>
     </actions>
 </idea-plugin>
