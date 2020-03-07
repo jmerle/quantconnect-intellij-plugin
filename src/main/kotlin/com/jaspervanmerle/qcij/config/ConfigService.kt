@@ -1,9 +1,5 @@
 package com.jaspervanmerle.qcij.config
 
-import com.intellij.credentialStore.CredentialAttributes
-import com.intellij.credentialStore.Credentials
-import com.intellij.credentialStore.generateServiceName
-import com.intellij.ide.passwordSafe.PasswordSafe
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.project.Project
@@ -20,14 +16,6 @@ class ConfigService(project: Project) : PersistentStateComponent<ConfigService.S
     val projectId: String
         get() = state.projectId
 
-    var userId: String?
-        get() = getCredentials()?.userName
-        set(value) = setCredentials(value, apiToken)
-
-    var apiToken: String?
-        get() = getCredentials()?.getPasswordAsString()
-        set(value) = setCredentials(apiToken, value)
-
     init {
         // An arbitrary id is assigned to the project so that other classes have a project-specific id rely on when needed.
         state.projectId = "${project.name}-${UUID.randomUUID()}"
@@ -39,17 +27,5 @@ class ConfigService(project: Project) : PersistentStateComponent<ConfigService.S
 
     override fun loadState(newState: State) {
         state.projectId = newState.projectId
-    }
-
-    private fun getCredentials(): Credentials? {
-        return PasswordSafe.instance.get(createCredentialAttributes())
-    }
-
-    private fun setCredentials(userId: String?, apiToken: String?) {
-        PasswordSafe.instance.set(createCredentialAttributes(), Credentials(userId, apiToken))
-    }
-
-    private fun createCredentialAttributes(): CredentialAttributes {
-        return CredentialAttributes(generateServiceName("com.jaspervanmerle.qcij.config.ConfigService", state.projectId))
     }
 }
