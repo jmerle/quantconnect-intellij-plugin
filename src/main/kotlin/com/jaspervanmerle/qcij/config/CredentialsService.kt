@@ -6,6 +6,7 @@ import com.intellij.credentialStore.generateServiceName
 import com.intellij.ide.passwordSafe.PasswordSafe
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.jaspervanmerle.qcij.api.QuantConnectCredentials
 
 class CredentialsService(private val project: Project) {
     fun getCredentials(): QuantConnectCredentials? {

@@ -1,10 +1,9 @@
 package com.jaspervanmerle.qcij.action
 
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.project.Project
 
-class RunBacktestAction : AnAction() {
-    override fun actionPerformed(e: AnActionEvent) {
+class RunBacktestAction : ProjectAction() {
+    override fun execute(project: Project) {
         // TODO(jmerle): Implement
     }
 }

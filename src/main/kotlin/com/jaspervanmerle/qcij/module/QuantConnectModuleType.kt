@@ -2,7 +2,7 @@ package com.jaspervanmerle.qcij.module
 
 import com.intellij.openapi.module.ModuleType
 import com.intellij.openapi.module.ModuleTypeManager
-import com.jaspervanmerle.qcij.QuantConnectIcons
+import com.jaspervanmerle.qcij.ui.QuantConnectIcons
 import javax.swing.Icon
 
 class QuantConnectModuleType : ModuleType<QuantConnectModuleBuilder>(ID) {

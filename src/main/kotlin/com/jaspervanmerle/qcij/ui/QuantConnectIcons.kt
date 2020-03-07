@@ -1,4 +1,4 @@
-package com.jaspervanmerle.qcij
+package com.jaspervanmerle.qcij.ui
 
 import com.intellij.openapi.util.IconLoader
 
