@@ -1,17 +1,22 @@
 <!-- See https://www.jetbrains.org/intellij/sdk/docs/basics/plugin_structure/plugin_configuration_file.html -->
 <idea-plugin url="https://github.com/jmerle/quantconnect-intellij-plugin">
     <id>com.jaspervanmerle.qcij</id>
-    <name>QuantConnect for IntelliJ</name>
+    <name>QuantConnect</name>
     <vendor email="jaspervmerle@gmail.com" url="https://jaspervanmerle.com">Jasper van Merle</vendor>
 
     <description><![CDATA[
-    QuantConnect for IntelliJ is an unofficial QuantConnect plugin for IntelliJ-based IDE's like Rider and PyCharm which provides tight integration between the IDE and QuantConnect. It provides a cross-platform alternative to the official Visual Studio plugin. Its main features are file syncing and running backtests from inside the IDE.
+    Unofficial QuantConnect plugin for IntelliJ-based IDE's like Rider and PyCharm which provides tight integration between the IDE and QuantConnect. It provides a cross-platform alternative to the official Visual Studio plugin. Its main features are file syncing and running backtests from inside the IDE.
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- TODO(jmerle): Create tool windows -->
+        <moduleType id="com.jaspervanmerle.qcij.module.QuantConnectModuleType"
+                    implementationClass="com.jaspervanmerle.qcij.module.QuantConnectModuleType"/>
+
+        <projectService serviceImplementation="com.jaspervanmerle.qcij.config.ConfigService"/>
+
+        <projectService serviceImplementation="com.jaspervanmerle.qcij.config.CredentialsService"/>
     </extensions>
 
     <!-- idea-version attribute is added by the patchPluginXml Gradle task -->
@@ -22,13 +27,15 @@
     </applicationListeners>
 
     <actions>
-        <group id="com.jaspervanmerle.qcij.action.ActionGroup" text="QuantConnect" popup="true">
+        <group id="com.jaspervanmerle.qcij.action.ActionGroup" text="QuantConnect" popup="true" icon="/icons/logo.png">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>
+
         <action id="com.jaspervanmerle.qcij.action.SyncAction" class="com.jaspervanmerle.qcij.action.SyncAction"
                 text="Sync" description="Synchronize projects and libraries">
             <add-to-group group-id="com.jaspervanmerle.qcij.action.ActionGroup" anchor="last"/>
         </action>
+
         <action id="com.jaspervanmerle.qcij.action.RunBacktestAction"
                 class="com.jaspervanmerle.qcij.action.RunBacktestAction" text="Run Backtest"
                 description="Run a backtest">
