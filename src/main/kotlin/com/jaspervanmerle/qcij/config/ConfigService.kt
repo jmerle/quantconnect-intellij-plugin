@@ -17,7 +17,7 @@ class ConfigService(project: Project) : PersistentStateComponent<ConfigService.S
         get() = state.projectId
 
     init {
-        // An arbitrary id is assigned to the project so that other classes have a project-specific id rely on when needed.
+        // An arbitrary id is assigned to the project so that other classes can use a project-specific id when needed
         state.projectId = "${project.name}-${UUID.randomUUID()}"
     }
 
