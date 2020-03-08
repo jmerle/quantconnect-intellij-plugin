@@ -17,6 +17,8 @@
         <projectService serviceImplementation="com.jaspervanmerle.qcij.config.ConfigService"/>
         <projectService serviceImplementation="com.jaspervanmerle.qcij.config.CredentialsService"/>
         <projectService serviceImplementation="com.jaspervanmerle.qcij.api.APIService"/>
+
+        <projectConfigurable instance="com.jaspervanmerle.qcij.config.ConfigConfigurable" groupId="tools"/>
     </extensions>
 
     <!-- idea-version attribute is added by the patchPluginXml Gradle task -->
