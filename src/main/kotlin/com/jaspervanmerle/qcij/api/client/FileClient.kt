@@ -2,9 +2,9 @@ package com.jaspervanmerle.qcij.api.client
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.jaspervanmerle.qcij.api.APIClient
-import com.jaspervanmerle.qcij.api.model.APIException
-import com.jaspervanmerle.qcij.api.model.GetAllFilesResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectFile
+import com.jaspervanmerle.qcij.api.model.exception.APIException
+import com.jaspervanmerle.qcij.api.model.response.GetAllFilesResponse
 
 class FileClient(private val api: APIClient) {
     fun get(projectId: Int, filename: String): QuantConnectFile {

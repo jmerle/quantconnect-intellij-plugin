@@ -2,8 +2,8 @@ package com.jaspervanmerle.qcij.api.client
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.jaspervanmerle.qcij.api.APIClient
-import com.jaspervanmerle.qcij.api.model.GetAllBacktestsResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectBacktest
+import com.jaspervanmerle.qcij.api.model.response.GetAllBacktestsResponse
 
 class BacktestClient(private val api: APIClient) {
     fun get(projectId: Int, backtestId: String): QuantConnectBacktest {

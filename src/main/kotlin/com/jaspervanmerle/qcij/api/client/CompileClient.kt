@@ -2,8 +2,8 @@ package com.jaspervanmerle.qcij.api.client
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.jaspervanmerle.qcij.api.APIClient
-import com.jaspervanmerle.qcij.api.model.CreateCompileResponse
-import com.jaspervanmerle.qcij.api.model.GetCompileResponse
+import com.jaspervanmerle.qcij.api.model.response.CreateCompileResponse
+import com.jaspervanmerle.qcij.api.model.response.GetCompileResponse
 
 class CompileClient(private val api: APIClient) {
     fun get(projectId: Int, compileId: String): GetCompileResponse {

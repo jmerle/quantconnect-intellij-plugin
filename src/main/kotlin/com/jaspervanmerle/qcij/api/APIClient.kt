@@ -9,9 +9,9 @@ import com.github.kittinunf.fuel.core.Method
 import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.extensions.authentication
 import com.github.kittinunf.result.Result
-import com.jaspervanmerle.qcij.api.model.APIException
-import com.jaspervanmerle.qcij.api.model.InvalidCredentialsException
 import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
+import com.jaspervanmerle.qcij.api.model.exception.APIException
+import com.jaspervanmerle.qcij.api.model.exception.InvalidCredentialsException
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import org.json.JSONObject

@@ -2,9 +2,9 @@ package com.jaspervanmerle.qcij.api.client
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.jaspervanmerle.qcij.api.APIClient
-import com.jaspervanmerle.qcij.api.model.APIException
-import com.jaspervanmerle.qcij.api.model.GetAllProjectsResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectProject
+import com.jaspervanmerle.qcij.api.model.exception.APIException
+import com.jaspervanmerle.qcij.api.model.response.GetAllProjectsResponse
 
 class ProjectClient(private val api: APIClient) {
     fun get(projectId: Int): QuantConnectProject {
