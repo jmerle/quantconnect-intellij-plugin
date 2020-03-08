@@ -38,6 +38,8 @@ class ConfigConfigurable(project: Project) : Configurable {
     }
 
     override fun apply() {
+        settingsPanel.validate()
+
         credentialsService.setCredentials(settingsPanel.userId, settingsPanel.apiToken)
         currentCredentials = credentialsService.getCredentials()!!
     }
