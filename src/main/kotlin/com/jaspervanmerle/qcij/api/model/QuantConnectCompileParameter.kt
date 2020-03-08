@@ -1,6 +1,3 @@
 package com.jaspervanmerle.qcij.api.model
 
-data class QuantConnectCompileParameter(
-    val file: String,
-    val parameters: List<QuantConnectCompileParameterItem>
-)
+data class QuantConnectCompileParameter(val line: Int, val type: String)
