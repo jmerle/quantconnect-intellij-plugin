@@ -17,18 +17,12 @@
         <projectService serviceImplementation="com.jaspervanmerle.qcij.config.ConfigService"/>
         <projectService serviceImplementation="com.jaspervanmerle.qcij.config.CredentialsService"/>
         <projectService serviceImplementation="com.jaspervanmerle.qcij.api.APIService"/>
+        <projectService serviceImplementation="com.jaspervanmerle.qcij.sync.SyncService"/>
 
         <projectConfigurable instance="com.jaspervanmerle.qcij.config.ConfigConfigurable" groupId="tools"/>
 
         <postStartupActivity implementation="com.jaspervanmerle.qcij.project.ProjectStartupActivity"/>
     </extensions>
-
-    <!-- idea-version attribute is added by the patchPluginXml Gradle task -->
-    <!--suppress PluginXmlValidity -->
-    <applicationListeners>
-        <listener class="com.jaspervanmerle.qcij.FileListener"
-                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
-    </applicationListeners>
 
     <actions>
         <group id="com.jaspervanmerle.qcij.action.ActionGroup" text="QuantConnect" popup="true" icon="/icons/logo.png">
