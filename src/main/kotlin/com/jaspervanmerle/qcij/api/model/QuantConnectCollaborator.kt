@@ -1,12 +1,12 @@
 package com.jaspervanmerle.qcij.api.model
 
-import com.beust.klaxon.Json
+import com.fasterxml.jackson.annotation.JsonProperty
 
 data class QuantConnectCollaborator(
     val id: Int,
-    @Json(name = "uid") val userId: Int,
-    @Json(name = "blivecontrol") val bLiveControl: Boolean,
-    @Json(name = "epermission") val ePermission: String,
-    @Json(name = "profileimage") val profileImageUrl: String,
+    @JsonProperty("uid") val userId: Int,
+    @JsonProperty("blivecontrol") val bLiveControl: Boolean,
+    @JsonProperty("epermission") val ePermission: String,
+    @JsonProperty("profileimage") val profileImageUrl: String,
     val name: String
 )

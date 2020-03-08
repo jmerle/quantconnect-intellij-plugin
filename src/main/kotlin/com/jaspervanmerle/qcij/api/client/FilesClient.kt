@@ -1,5 +1,6 @@
 package com.jaspervanmerle.qcij.api.client
 
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.jaspervanmerle.qcij.api.APIClient
 import com.jaspervanmerle.qcij.api.model.APIException
 import com.jaspervanmerle.qcij.api.model.GetAllFilesResponse
@@ -8,14 +9,16 @@ import org.json.JSONObject
 
 class FilesClient(private val api: APIClient) {
     fun get(projectId: Int, filename: String): QuantConnectFile {
-        return api.klaxon
-            .parse<GetAllFilesResponse>(api.get("/files/read?projectId=$projectId&name=$filename"))!!
+        return api.objectMapper
+            .readValue<GetAllFilesResponse>(api.get("/files/read?projectId=$projectId&name=$filename"))
             .files
             .firstOrNull() ?: throw APIException("File $filename in project $projectId does not exist")
     }
 
     fun getAll(projectId: Int): List<QuantConnectFile> {
-        return api.klaxon.parse<GetAllFilesResponse>(api.get("/files/read?projectId=$projectId"))!!.files
+        return api.objectMapper
+            .readValue<GetAllFilesResponse>(api.get("/files/read?projectId=$projectId"))
+            .files
     }
 
     fun create(projectId: Int, filename: String, content: String): QuantConnectFile {
@@ -25,8 +28,8 @@ class FilesClient(private val api: APIClient) {
             "content" to content
         )))
 
-        return api.klaxon
-            .parse<GetAllFilesResponse>(response)!!
+        return api.objectMapper
+            .readValue<GetAllFilesResponse>(response)
             .files
             .firstOrNull() ?: throw APIException("File $filename in project $projectId could not be created")
     }

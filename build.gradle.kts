@@ -15,9 +15,10 @@ repositories {
 
 dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.2.1")
-    implementation("com.beust:klaxon:5.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.10.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-json-org:2.10.3")
     implementation("org.json:json:20190722")
-    implementation("commons-codec:commons-codec:1.14")
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin

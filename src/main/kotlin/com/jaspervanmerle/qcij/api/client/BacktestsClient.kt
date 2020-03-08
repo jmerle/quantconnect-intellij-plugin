@@ -1,5 +1,6 @@
 package com.jaspervanmerle.qcij.api.client
 
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.jaspervanmerle.qcij.api.APIClient
 import com.jaspervanmerle.qcij.api.model.GetAllBacktestsResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectBacktest
@@ -7,11 +8,13 @@ import org.json.JSONObject
 
 class BacktestsClient(private val api: APIClient) {
     fun get(projectId: Int, backtestId: String): QuantConnectBacktest {
-        return api.klaxon.parse(api.get("/backtests/read?projectId=$projectId&backtestId=$backtestId"))!!
+        return api.objectMapper.readValue(api.get("/backtests/read?projectId=$projectId&backtestId=$backtestId"))
     }
 
     fun getAll(projectId: Int): List<QuantConnectBacktest> {
-        return api.klaxon.parse<GetAllBacktestsResponse>(api.get("/backtests/read?projectId=$projectId"))!!.backtests
+        return api.objectMapper
+            .readValue<GetAllBacktestsResponse>(api.get("/backtests/read?projectId=$projectId"))
+            .backtests
     }
 
     fun create(projectId: Int, compileId: String, name: String): QuantConnectBacktest {
@@ -21,7 +24,7 @@ class BacktestsClient(private val api: APIClient) {
             "backtestName" to name
         )))
 
-        return api.klaxon.parse(response)!!
+        return api.objectMapper.readValue(response)
     }
 
     fun update(projectId: Int, backtestId: String, name: String, note: String) {

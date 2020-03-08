@@ -11,6 +11,8 @@ class SyncAction : ProjectAction() {
         api.backtests.getAll(3910361)
         val bt = api.backtests.get(3910361, "d24bef4aef0b5204bcc4307d1053e7d7")
         println(bt.result)
+        println(bt.successful)
+        println(bt.created)
 
         // TODO(jmerle): Implement
     }
