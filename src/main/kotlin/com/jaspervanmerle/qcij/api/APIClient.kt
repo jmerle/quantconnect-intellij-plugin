@@ -18,7 +18,7 @@ import org.json.JSONObject
 
 class APIClient(var credentials: QuantConnectCredentials? = null) {
     companion object {
-        const val BASE_URL = "https://www.quantconnect.com/api/v2"
+        private const val BASE_URL = "https://www.quantconnect.com/api/v2/"
     }
 
     val objectMapper: ObjectMapper = ObjectMapper()
@@ -69,11 +69,8 @@ class APIClient(var credentials: QuantConnectCredentials? = null) {
         }
 
         val body = result.get()
+
         val json = JSONObject(body)
-
-        // TODO(jmerle): Remove debugging code
-        println(json.toString(4))
-
         if (!json.getBoolean("success")) {
             if (json.has("errors")) {
                 val errors = json.getJSONArray("errors")

@@ -7,10 +7,10 @@ import com.jaspervanmerle.qcij.api.model.GetCompileResponse
 
 class CompileClient(private val api: APIClient) {
     fun get(projectId: Int, compileId: String): GetCompileResponse {
-        return api.objectMapper.readValue(api.get("/compile/read?projectId=$projectId&compileId=$compileId"))
+        return api.objectMapper.readValue(api.get("compile/read?projectId=$projectId&compileId=$compileId"))
     }
 
     fun create(projectId: Int): CreateCompileResponse {
-        return api.objectMapper.readValue(api.post("/compile/create?projectId=$projectId"))
+        return api.objectMapper.readValue(api.post("compile/create?projectId=$projectId"))
     }
 }

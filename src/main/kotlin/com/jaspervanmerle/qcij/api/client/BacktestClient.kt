@@ -7,17 +7,17 @@ import com.jaspervanmerle.qcij.api.model.QuantConnectBacktest
 
 class BacktestClient(private val api: APIClient) {
     fun get(projectId: Int, backtestId: String): QuantConnectBacktest {
-        return api.objectMapper.readValue(api.get("/backtests/read?projectId=$projectId&backtestId=$backtestId"))
+        return api.objectMapper.readValue(api.get("backtests/read?projectId=$projectId&backtestId=$backtestId"))
     }
 
     fun getAll(projectId: Int): List<QuantConnectBacktest> {
         return api.objectMapper
-            .readValue<GetAllBacktestsResponse>(api.get("/backtests/read?projectId=$projectId"))
+            .readValue<GetAllBacktestsResponse>(api.get("backtests/read?projectId=$projectId"))
             .backtests
     }
 
     fun create(projectId: Int, compileId: String, name: String): QuantConnectBacktest {
-        val response = api.post("/backtests/create", mapOf(
+        val response = api.post("backtests/create", mapOf(
             "projectId" to projectId,
             "compileId" to compileId,
             "backtestName" to name
@@ -27,7 +27,7 @@ class BacktestClient(private val api: APIClient) {
     }
 
     fun update(projectId: Int, backtestId: String, name: String, note: String) {
-        api.post("/backtests/update", mapOf(
+        api.post("backtests/update", mapOf(
             "projectId" to projectId,
             "backtestId" to backtestId,
             "name" to name,
@@ -36,6 +36,6 @@ class BacktestClient(private val api: APIClient) {
     }
 
     fun delete(projectId: Int, backtestId: String) {
-        api.post("/backtests/delete?projectId=$projectId&backtestId=$backtestId")
+        api.post("backtests/delete?projectId=$projectId&backtestId=$backtestId")
     }
 }

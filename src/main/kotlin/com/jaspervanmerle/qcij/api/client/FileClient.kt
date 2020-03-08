@@ -9,19 +9,19 @@ import com.jaspervanmerle.qcij.api.model.QuantConnectFile
 class FileClient(private val api: APIClient) {
     fun get(projectId: Int, filename: String): QuantConnectFile {
         return api.objectMapper
-            .readValue<GetAllFilesResponse>(api.get("/files/read?projectId=$projectId&name=$filename"))
+            .readValue<GetAllFilesResponse>(api.get("files/read?projectId=$projectId&name=$filename"))
             .files
             .firstOrNull() ?: throw APIException("File $filename in project $projectId does not exist")
     }
 
     fun getAll(projectId: Int): List<QuantConnectFile> {
         return api.objectMapper
-            .readValue<GetAllFilesResponse>(api.get("/files/read?projectId=$projectId"))
+            .readValue<GetAllFilesResponse>(api.get("files/read?projectId=$projectId"))
             .files
     }
 
     fun create(projectId: Int, filename: String, content: String): QuantConnectFile {
-        val response = api.post("/files/create", mapOf(
+        val response = api.post("files/create", mapOf(
             "projectId" to projectId,
             "name" to filename,
             "content" to content
@@ -34,7 +34,7 @@ class FileClient(private val api: APIClient) {
     }
 
     fun update(projectId: Int, filename: String, content: String) {
-        api.post("/files/update", mapOf(
+        api.post("files/update", mapOf(
             "projectId" to projectId,
             "name" to filename,
             "content" to content
@@ -42,7 +42,7 @@ class FileClient(private val api: APIClient) {
     }
 
     fun delete(projectId: Int, filename: String) {
-        api.post("/files/delete", mapOf(
+        api.post("files/delete", mapOf(
             "projectId" to projectId,
             "name" to filename
         ))
