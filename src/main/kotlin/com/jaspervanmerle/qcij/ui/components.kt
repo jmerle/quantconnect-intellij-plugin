@@ -1,9 +1,9 @@
 package com.jaspervanmerle.qcij.ui
 
 import com.intellij.ui.components.JBCheckBox
+import com.intellij.ui.components.JBPasswordField
+import com.intellij.ui.components.JBTextField
 import javax.swing.JComponent
-import javax.swing.JPasswordField
-import javax.swing.JTextField
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 import javax.swing.text.JTextComponent
@@ -31,8 +31,8 @@ private fun wrapTextComponent(component: JTextComponent, property: KMutablePrope
     return component
 }
 
-fun createTextField(property: KMutableProperty0<String>): JComponent = wrapTextComponent(JTextField(), property)
-fun createPasswordField(property: KMutableProperty0<String>): JComponent = wrapTextComponent(JPasswordField(), property)
+fun createTextField(property: KMutableProperty0<String>): JComponent = wrapTextComponent(JBTextField(), property)
+fun createPasswordField(property: KMutableProperty0<String>): JComponent = wrapTextComponent(JBPasswordField(), property)
 
 fun createCheckBox(property: KMutableProperty0<Boolean>, label: String? = null): JComponent {
     val component = JBCheckBox(label)
