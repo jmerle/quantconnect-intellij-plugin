@@ -15,8 +15,8 @@
                     implementationClass="com.jaspervanmerle.qcij.module.QuantConnectModuleType"/>
 
         <projectService serviceImplementation="com.jaspervanmerle.qcij.config.ConfigService"/>
-
         <projectService serviceImplementation="com.jaspervanmerle.qcij.config.CredentialsService"/>
+        <projectService serviceImplementation="com.jaspervanmerle.qcij.api.APIService"/>
     </extensions>
 
     <!-- idea-version attribute is added by the patchPluginXml Gradle task -->

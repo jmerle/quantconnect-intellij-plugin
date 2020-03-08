@@ -2,7 +2,7 @@ package com.jaspervanmerle.qcij.module
 
 import com.intellij.openapi.module.ModuleType
 import com.intellij.openapi.module.ModuleTypeManager
-import com.jaspervanmerle.qcij.ui.QuantConnectIcons
+import com.jaspervanmerle.qcij.ui.Icons
 import javax.swing.Icon
 
 class QuantConnectModuleType : ModuleType<QuantConnectModuleBuilder>(ID) {
@@ -27,6 +27,6 @@ class QuantConnectModuleType : ModuleType<QuantConnectModuleBuilder>(ID) {
     }
 
     override fun getNodeIcon(isOpened: Boolean): Icon {
-        return QuantConnectIcons.LOGO
+        return Icons.LOGO
     }
 }

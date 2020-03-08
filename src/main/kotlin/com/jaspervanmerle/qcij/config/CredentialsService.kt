@@ -6,7 +6,7 @@ import com.intellij.credentialStore.generateServiceName
 import com.intellij.ide.passwordSafe.PasswordSafe
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.jaspervanmerle.qcij.api.QuantConnectCredentials
+import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 
 class CredentialsService(private val project: Project) {
     fun getCredentials(): QuantConnectCredentials? {
@@ -20,6 +20,9 @@ class CredentialsService(private val project: Project) {
 
     fun setCredentials(userId: String?, apiToken: String?) {
         PasswordSafe.instance.set(createCredentialAttributes(), Credentials(userId, apiToken))
+
+        val publisher = project.messageBus.syncPublisher(CredentialsListener.TOPIC)
+        publisher.onCredentialsChange(getCredentials())
     }
 
     private fun createCredentialAttributes(): CredentialAttributes {

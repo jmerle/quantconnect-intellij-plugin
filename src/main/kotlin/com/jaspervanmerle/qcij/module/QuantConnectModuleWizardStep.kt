@@ -4,6 +4,11 @@ import com.intellij.ide.BrowserUtil
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.openapi.options.ConfigurationException
 import com.intellij.ui.layout.panel
+import com.jaspervanmerle.qcij.api.APIClient
+import com.jaspervanmerle.qcij.api.APIException
+import com.jaspervanmerle.qcij.api.InvalidCredentialsException
+import com.jaspervanmerle.qcij.api.client.ProjectsClient
+import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 import com.jaspervanmerle.qcij.ui.createPasswordField
 import com.jaspervanmerle.qcij.ui.createTextField
 import javax.swing.JComponent
@@ -44,7 +49,13 @@ class QuantConnectModuleWizardStep(private val builder: QuantConnectModuleBuilde
             throw ConfigurationException("API token cannot be blank")
         }
 
-        // TODO(jmerle): Check if User ID <> API token combination is valid
+        try {
+            ProjectsClient(APIClient(QuantConnectCredentials(userId, apiToken))).getAll()
+        } catch (e: InvalidCredentialsException) {
+            throw ConfigurationException("Invalid user ID and/or API token")
+        } catch (e: APIException) {
+            // Could not check token, assume it is valid
+        }
 
         return true
     }

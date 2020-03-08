@@ -13,6 +13,12 @@ repositories {
     jcenter()
 }
 
+dependencies {
+    implementation("com.github.kittinunf.fuel:fuel:2.2.1")
+    implementation("com.github.salomonbrys.kotson:kotson:2.5.0")
+    implementation("commons-codec:commons-codec:1.14")
+}
+
 // See https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
     version = "2019.3"
