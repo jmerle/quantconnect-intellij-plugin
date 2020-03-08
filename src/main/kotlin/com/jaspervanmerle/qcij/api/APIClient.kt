@@ -31,8 +31,8 @@ class APIClient(var credentials: QuantConnectCredentials? = null) {
         return executeRequest(request(Method.GET, endpoint))
     }
 
-    fun post(endpoint: String, body: JSONObject = JSONObject()): String {
-        return executeRequest(request(Method.POST, endpoint).body(body.toString()))
+    fun post(endpoint: String, body: Map<String, Any> = emptyMap()): String {
+        return executeRequest(request(Method.POST, endpoint).body(JSONObject(body).toString()))
     }
 
     private fun request(method: Method, endpoint: String): Request {

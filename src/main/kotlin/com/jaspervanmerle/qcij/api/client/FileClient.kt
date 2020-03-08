@@ -5,7 +5,6 @@ import com.jaspervanmerle.qcij.api.APIClient
 import com.jaspervanmerle.qcij.api.model.APIException
 import com.jaspervanmerle.qcij.api.model.GetAllFilesResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectFile
-import org.json.JSONObject
 
 class FileClient(private val api: APIClient) {
     fun get(projectId: Int, filename: String): QuantConnectFile {
@@ -22,11 +21,11 @@ class FileClient(private val api: APIClient) {
     }
 
     fun create(projectId: Int, filename: String, content: String): QuantConnectFile {
-        val response = api.post("/files/create", JSONObject(mapOf(
+        val response = api.post("/files/create", mapOf(
             "projectId" to projectId,
             "name" to filename,
             "content" to content
-        )))
+        ))
 
         return api.objectMapper
             .readValue<GetAllFilesResponse>(response)
@@ -35,17 +34,17 @@ class FileClient(private val api: APIClient) {
     }
 
     fun update(projectId: Int, filename: String, content: String) {
-        api.post("/files/update", JSONObject(mapOf(
+        api.post("/files/update", mapOf(
             "projectId" to projectId,
             "name" to filename,
             "content" to content
-        )))
+        ))
     }
 
     fun delete(projectId: Int, filename: String) {
-        api.post("/files/delete", JSONObject(mapOf(
+        api.post("/files/delete", mapOf(
             "projectId" to projectId,
             "name" to filename
-        )))
+        ))
     }
 }
