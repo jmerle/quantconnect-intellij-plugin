@@ -1,12 +1,12 @@
 package com.jaspervanmerle.qcij.api.model
 
-import com.google.gson.annotations.SerializedName
+import com.beust.klaxon.Json
 
 data class QuantConnectCollaborator(
     val id: Int,
-    @SerializedName("uid") val userId: Int,
-    @SerializedName("blivecontrol") val bLiveControl: Boolean,
-    @SerializedName("epermission") val ePermission: String,
-    @SerializedName("profileimage") val profileImageUrl: String,
+    @Json(name = "uid") val userId: Int,
+    @Json(name = "blivecontrol") val bLiveControl: Boolean,
+    @Json(name = "epermission") val ePermission: String,
+    @Json(name = "profileimage") val profileImageUrl: String,
     val name: String
 )

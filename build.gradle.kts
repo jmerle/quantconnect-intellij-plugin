@@ -15,7 +15,8 @@ repositories {
 
 dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.2.1")
-    implementation("com.github.salomonbrys.kotson:kotson:2.5.0")
+    implementation("com.beust:klaxon:5.2")
+    implementation("org.json:json:20190722")
     implementation("commons-codec:commons-codec:1.14")
 }
 

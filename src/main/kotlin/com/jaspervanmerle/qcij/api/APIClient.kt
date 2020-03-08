@@ -1,39 +1,33 @@
 package com.jaspervanmerle.qcij.api
 
+import com.beust.klaxon.Klaxon
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Method
 import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.extensions.authentication
 import com.github.kittinunf.result.Result
-import com.github.salomonbrys.kotson.array
-import com.github.salomonbrys.kotson.bool
-import com.github.salomonbrys.kotson.get
-import com.github.salomonbrys.kotson.string
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
+import com.jaspervanmerle.qcij.api.converter.DateConverter
+import com.jaspervanmerle.qcij.api.converter.JSONObjectConverter
 import com.jaspervanmerle.qcij.api.model.APIException
 import com.jaspervanmerle.qcij.api.model.InvalidCredentialsException
 import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 import org.apache.commons.codec.digest.DigestUtils
+import org.json.JSONObject
 
 class APIClient(var credentials: QuantConnectCredentials? = null) {
     companion object {
         const val BASE_URL = "https://www.quantconnect.com/api/v2"
     }
 
-    val gson = GsonBuilder()
-        .setPrettyPrinting()
-        .setDateFormat("yyyy-LL-dd HH:mm:ss")
-        .create()
-
-    private val parser = JsonParser()
+    val klaxon = Klaxon()
+        .converter(DateConverter())
+        .converter(JSONObjectConverter())
 
     fun get(endpoint: String): String {
         return executeRequest(request(Method.GET, endpoint))
     }
 
-    fun post(endpoint: String, body: JsonObject = JsonObject()): String {
+    fun post(endpoint: String, body: JSONObject = JSONObject()): String {
         return executeRequest(request(Method.POST, endpoint).body(body.toString()))
     }
 
@@ -70,23 +64,27 @@ class APIClient(var credentials: QuantConnectCredentials? = null) {
             is Result.Success -> {
                 val body = result.get()
 
-                // Uncomment this line to log a prettified version of the response
-                println(gson.toJson(parser.parse(body).asJsonObject))
+                // TODO(jmerle): Remove debugging code
+                println(JSONObject(body).toString(4))
 
-                val json = parser.parse(body).asJsonObject
-                if (json.has("success") && !json["success"].bool) {
-                    if (json.has("errors") && json["errors"].array.size() > 0) {
-                        val error = json["errors"][0].string
+                val json = JSONObject(body)
+                if (json.has("success") && !json.getBoolean("success")) {
+                    if (json.has("errors")) {
+                        val errors = json.getJSONArray("errors")
+                        if (errors.length() > 0) {
+                            val error = errors.getString(0)
 
-                        if (error.startsWith("Hash doesn't match.")) {
-                            throw InvalidCredentialsException()
+                            if (error.startsWith("Hash doesn't match.")) {
+                                throw InvalidCredentialsException()
+                            }
+
+                            throw APIException(error)
                         }
-
-                        throw APIException(error)
                     }
 
-                    if (json.has("messages") && json["messages"].array.size() > 0) {
-                        throw APIException(json["messages"][0].string)
+                    if (json.has("messages")) {
+                        val messages = json.getJSONArray("messages")
+                        throw APIException(messages.getString(0))
                     }
 
                     throw APIException("Something went wrong (status code ${response.statusCode})")
