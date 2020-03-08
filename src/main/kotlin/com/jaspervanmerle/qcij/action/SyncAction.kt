@@ -8,11 +8,9 @@ class SyncAction : ProjectAction() {
     override fun execute(project: Project) {
         val api = project.service<APIService>()
 
-        api.backtests.getAll(3910361)
-        val bt = api.backtests.get(3910361, "d24bef4aef0b5204bcc4307d1053e7d7")
-        println(bt.result)
-        println(bt.successful)
-        println(bt.created)
+        val compile = api.compiles.create(3910361)
+        val status = api.compiles.get(3910361, compile.compileId)
+        println(status)
 
         // TODO(jmerle): Implement
     }

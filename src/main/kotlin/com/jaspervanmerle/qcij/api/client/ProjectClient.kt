@@ -7,7 +7,7 @@ import com.jaspervanmerle.qcij.api.model.GetAllProjectsResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectProject
 import org.json.JSONObject
 
-class ProjectsClient(private val api: APIClient) {
+class ProjectClient(private val api: APIClient) {
     fun get(projectId: Int): QuantConnectProject {
         return api.objectMapper
             .readValue<GetAllProjectsResponse>(api.get("/projects/read?projectId=$projectId"))

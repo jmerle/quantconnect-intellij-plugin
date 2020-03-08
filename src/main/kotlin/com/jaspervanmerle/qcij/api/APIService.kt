@@ -2,9 +2,10 @@ package com.jaspervanmerle.qcij.api
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.jaspervanmerle.qcij.api.client.BacktestsClient
-import com.jaspervanmerle.qcij.api.client.FilesClient
-import com.jaspervanmerle.qcij.api.client.ProjectsClient
+import com.jaspervanmerle.qcij.api.client.BacktestClient
+import com.jaspervanmerle.qcij.api.client.CompileClient
+import com.jaspervanmerle.qcij.api.client.FileClient
+import com.jaspervanmerle.qcij.api.client.ProjectClient
 import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 import com.jaspervanmerle.qcij.config.CredentialsListener
 import com.jaspervanmerle.qcij.config.CredentialsService
@@ -20,7 +21,8 @@ class APIService(project: Project) {
         })
     }
 
-    val files = FilesClient(api)
-    val projects = ProjectsClient(api)
-    val backtests = BacktestsClient(api)
+    val files = FileClient(api)
+    val projects = ProjectClient(api)
+    val backtests = BacktestClient(api)
+    val compiles = CompileClient(api)
 }

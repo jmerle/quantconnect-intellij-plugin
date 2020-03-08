@@ -5,7 +5,7 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.openapi.options.ConfigurationException
 import com.intellij.ui.layout.panel
 import com.jaspervanmerle.qcij.api.APIClient
-import com.jaspervanmerle.qcij.api.client.ProjectsClient
+import com.jaspervanmerle.qcij.api.client.ProjectClient
 import com.jaspervanmerle.qcij.api.model.APIException
 import com.jaspervanmerle.qcij.api.model.InvalidCredentialsException
 import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
@@ -50,7 +50,7 @@ class QuantConnectModuleWizardStep(private val builder: QuantConnectModuleBuilde
         }
 
         try {
-            ProjectsClient(APIClient(QuantConnectCredentials(userId, apiToken))).getAll()
+            ProjectClient(APIClient(QuantConnectCredentials(userId, apiToken))).getAll()
         } catch (e: InvalidCredentialsException) {
             throw ConfigurationException("Invalid user ID and/or API token")
         } catch (e: APIException) {

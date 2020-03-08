@@ -7,7 +7,7 @@ import com.jaspervanmerle.qcij.api.model.GetAllFilesResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectFile
 import org.json.JSONObject
 
-class FilesClient(private val api: APIClient) {
+class FileClient(private val api: APIClient) {
     fun get(projectId: Int, filename: String): QuantConnectFile {
         return api.objectMapper
             .readValue<GetAllFilesResponse>(api.get("/files/read?projectId=$projectId&name=$filename"))

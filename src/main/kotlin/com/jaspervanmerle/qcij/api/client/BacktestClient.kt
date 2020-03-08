@@ -6,7 +6,7 @@ import com.jaspervanmerle.qcij.api.model.GetAllBacktestsResponse
 import com.jaspervanmerle.qcij.api.model.QuantConnectBacktest
 import org.json.JSONObject
 
-class BacktestsClient(private val api: APIClient) {
+class BacktestClient(private val api: APIClient) {
     fun get(projectId: Int, backtestId: String): QuantConnectBacktest {
         return api.objectMapper.readValue(api.get("/backtests/read?projectId=$projectId&backtestId=$backtestId"))
     }
