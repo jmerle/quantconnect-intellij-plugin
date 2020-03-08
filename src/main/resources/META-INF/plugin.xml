@@ -19,6 +19,8 @@
         <projectService serviceImplementation="com.jaspervanmerle.qcij.api.APIService"/>
 
         <projectConfigurable instance="com.jaspervanmerle.qcij.config.ConfigConfigurable" groupId="tools"/>
+
+        <postStartupActivity implementation="com.jaspervanmerle.qcij.project.ProjectStartupActivity"/>
     </extensions>
 
     <!-- idea-version attribute is added by the patchPluginXml Gradle task -->
@@ -35,12 +37,6 @@
 
         <action id="com.jaspervanmerle.qcij.action.SyncAction" class="com.jaspervanmerle.qcij.action.SyncAction"
                 text="Sync" description="Synchronize projects and libraries">
-            <add-to-group group-id="com.jaspervanmerle.qcij.action.ActionGroup" anchor="last"/>
-        </action>
-
-        <action id="com.jaspervanmerle.qcij.action.RunBacktestAction"
-                class="com.jaspervanmerle.qcij.action.RunBacktestAction" text="Run Backtest"
-                description="Run a backtest">
             <add-to-group group-id="com.jaspervanmerle.qcij.action.ActionGroup" anchor="last"/>
         </action>
     </actions>

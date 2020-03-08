@@ -2,10 +2,9 @@ package com.jaspervanmerle.qcij.action
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.jaspervanmerle.qcij.Notifications
-import com.jaspervanmerle.qcij.config.CredentialsService
+import com.jaspervanmerle.qcij.project.isQuantConnectProject
 
 abstract class ProjectAction : AnAction() {
     override fun update(e: AnActionEvent) {
@@ -13,16 +12,14 @@ abstract class ProjectAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        if (e.project == null) return
-        val project = e.project!!
+        val project = e.project
 
-        val credentials = project.service<CredentialsService>().getCredentials()
-        if (credentials == null) {
+        if (!project.isQuantConnectProject()) {
             Notifications.error("This is not a QuantConnect project, create one in the New Project Wizard.", project)
             return
         }
 
-        execute(project)
+        execute(project!!)
     }
 
     protected abstract fun execute(project: Project)
