@@ -9,8 +9,11 @@ import com.github.salomonbrys.kotson.array
 import com.github.salomonbrys.kotson.bool
 import com.github.salomonbrys.kotson.get
 import com.github.salomonbrys.kotson.string
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import com.jaspervanmerle.qcij.api.model.APIException
+import com.jaspervanmerle.qcij.api.model.InvalidCredentialsException
 import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 import org.apache.commons.codec.digest.DigestUtils
 
@@ -18,6 +21,11 @@ class APIClient(var credentials: QuantConnectCredentials? = null) {
     companion object {
         const val BASE_URL = "https://www.quantconnect.com/api/v2"
     }
+
+    val gson = GsonBuilder()
+        .setPrettyPrinting()
+        .setDateFormat("yyyy-LL-dd HH:mm:ss")
+        .create()
 
     private val parser = JsonParser()
 
@@ -62,7 +70,8 @@ class APIClient(var credentials: QuantConnectCredentials? = null) {
             is Result.Success -> {
                 val body = result.get()
 
-                println(body)
+                // Uncomment this line to log a prettified version of the response
+                println(gson.toJson(parser.parse(body).asJsonObject))
 
                 val json = parser.parse(body).asJsonObject
                 if (json.has("success") && !json["success"].bool) {

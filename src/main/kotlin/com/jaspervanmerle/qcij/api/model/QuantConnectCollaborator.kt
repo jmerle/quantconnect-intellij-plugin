@@ -1,12 +1,12 @@
 package com.jaspervanmerle.qcij.api.model
 
-// Taken from https://github.com/trestrantham/quantconnect-filesync/blob/master/src/types.ts
+import com.google.gson.annotations.SerializedName
 
 data class QuantConnectCollaborator(
     val id: Int,
-    val uid: Int,
-    val blivecontrol: Boolean,
-    val epermission: String,
-    val profileimage: String,
+    @SerializedName("uid") val userId: Int,
+    @SerializedName("blivecontrol") val bLiveControl: Boolean,
+    @SerializedName("epermission") val ePermission: String,
+    @SerializedName("profileimage") val profileImageUrl: String,
     val name: String
 )

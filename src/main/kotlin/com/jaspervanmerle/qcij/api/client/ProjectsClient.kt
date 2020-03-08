@@ -1,19 +1,25 @@
 package com.jaspervanmerle.qcij.api.client
 
 import com.github.salomonbrys.kotson.fromJson
-import com.google.gson.Gson
+import com.github.salomonbrys.kotson.jsonObject
 import com.jaspervanmerle.qcij.api.APIClient
+import com.jaspervanmerle.qcij.api.model.APIException
 import com.jaspervanmerle.qcij.api.model.GetAllProjectsResponse
-import com.jaspervanmerle.qcij.api.model.GetProjectResponse
+import com.jaspervanmerle.qcij.api.model.QuantConnectProject
 
-class ProjectsClient(val api: APIClient) {
-    private val gson = Gson()
-
-    fun get(projectId: Int): GetProjectResponse {
-        return gson.fromJson(api.get("/projects/read?projectId=$projectId"))
+class ProjectsClient(private val api: APIClient) {
+    fun get(projectId: Int): QuantConnectProject {
+        return api.gson
+            .fromJson<GetAllProjectsResponse>(api.get("/projects/read?projectId=$projectId"))
+            .projects
+            .firstOrNull() ?: throw APIException("Project $projectId does not exist")
     }
 
-    fun getAll(): GetAllProjectsResponse {
-        return gson.fromJson(api.get("/projects/read"))
+    fun getAll(): List<QuantConnectProject> {
+        return api.gson.fromJson<GetAllProjectsResponse>(api.get("/projects/read")).projects
+    }
+
+    fun delete(projectId: Int) {
+        api.post("/projects/delete", jsonObject("projectId" to projectId))
     }
 }

@@ -1,12 +1,12 @@
 package com.jaspervanmerle.qcij.api.model
 
-// Taken from https://github.com/trestrantham/quantconnect-filesync/blob/master/src/types.ts
+import java.util.Date
 
 data class QuantConnectProject(
     val projectId: Int,
     val name: String,
-    val modified: String,
-    val created: String,
+    val modified: Date,
+    val created: Date,
     val ownerId: Int,
     val language: String,
     val collaborators: List<QuantConnectCollaborator>,
@@ -14,5 +14,7 @@ data class QuantConnectProject(
     val owner: Boolean,
     val description: String,
     val channelId: String,
-    val files: List<QuantConnectFile>
+    val parameters: List<QuantConnectParameter>,
+    val libraries: List<Int>,
+    val isAlphaStreamDeployment: Int
 )

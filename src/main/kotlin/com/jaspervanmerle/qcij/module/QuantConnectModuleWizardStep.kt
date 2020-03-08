@@ -5,9 +5,9 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.openapi.options.ConfigurationException
 import com.intellij.ui.layout.panel
 import com.jaspervanmerle.qcij.api.APIClient
-import com.jaspervanmerle.qcij.api.APIException
-import com.jaspervanmerle.qcij.api.InvalidCredentialsException
 import com.jaspervanmerle.qcij.api.client.ProjectsClient
+import com.jaspervanmerle.qcij.api.model.APIException
+import com.jaspervanmerle.qcij.api.model.InvalidCredentialsException
 import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 import com.jaspervanmerle.qcij.ui.createPasswordField
 import com.jaspervanmerle.qcij.ui.createTextField
