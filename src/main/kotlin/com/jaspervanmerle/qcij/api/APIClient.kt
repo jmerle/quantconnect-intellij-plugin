@@ -2,6 +2,7 @@ package com.jaspervanmerle.qcij.api
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.github.kittinunf.fuel.Fuel
@@ -12,19 +13,30 @@ import com.github.kittinunf.result.Result
 import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 import com.jaspervanmerle.qcij.api.model.exception.APIException
 import com.jaspervanmerle.qcij.api.model.exception.InvalidCredentialsException
+import com.jaspervanmerle.qcij.api.serializer.InstantDeserializer
+import com.jaspervanmerle.qcij.api.serializer.InstantSerializer
 import java.security.MessageDigest
-import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import org.json.JSONObject
 
 class APIClient(var credentials: QuantConnectCredentials? = null) {
     companion object {
         private const val BASE_URL = "https://www.quantconnect.com/api/v2/"
+
+        private val DATE_FORMAT = DateTimeFormatter
+            .ofPattern("yyyy-MM-dd HH:mm:ss")
+            .withZone(ZoneOffset.UTC)
     }
 
     val objectMapper: ObjectMapper = ObjectMapper()
         .registerModule(KotlinModule())
         .registerModule(JsonOrgModule())
-        .setDateFormat(SimpleDateFormat("yyyy-LL-dd HH:mm:ss"))
+        .registerModule(SimpleModule()
+            .addSerializer(Instant::class.java, InstantSerializer(DATE_FORMAT))
+            .addDeserializer(Instant::class.java, InstantDeserializer(DATE_FORMAT))
+        )
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
     fun get(endpoint: String): String {

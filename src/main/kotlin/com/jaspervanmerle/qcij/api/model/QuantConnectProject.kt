@@ -1,12 +1,12 @@
 package com.jaspervanmerle.qcij.api.model
 
-import java.util.Date
+import java.time.Instant
 
 data class QuantConnectProject(
     val projectId: Int,
     val name: String,
-    val modified: Date,
-    val created: Date,
+    val modified: Instant,
+    val created: Instant,
     val ownerId: Int,
     val language: String,
     val collaborators: List<QuantConnectCollaborator>,

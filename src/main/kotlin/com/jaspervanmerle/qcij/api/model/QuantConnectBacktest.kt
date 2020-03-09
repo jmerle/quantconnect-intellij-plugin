@@ -1,13 +1,13 @@
 package com.jaspervanmerle.qcij.api.model
 
-import java.util.Date
+import java.time.Instant
 import org.json.JSONObject
 
 data class QuantConnectBacktest(
     val backtestId: String,
     val name: String,
     val note: String?,
-    val created: Date,
+    val created: Instant,
     val completed: Boolean,
     val progress: Int,
     val error: String?,
