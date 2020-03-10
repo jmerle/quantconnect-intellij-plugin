@@ -32,7 +32,6 @@ class SyncTask(project: Project) : Task.Backgroundable(
     private val config = project.service<ConfigService>()
 
     override fun run(indicator: ProgressIndicator) {
-        indicator.isIndeterminate = false
         indicator.fraction = 0.0
 
         indicator.text = "Pushing changes"
