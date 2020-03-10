@@ -10,6 +10,4 @@ QuantConnect IntelliJ Plugin is an unofficial QuantConnect plugin for IntelliJ-b
 
 Outside the scope of this projects are some things which are better suited for the web interface:
 - Anything to do with live trading
-- Creating new projects
-- Creating new libraries
 - Viewing backtests
