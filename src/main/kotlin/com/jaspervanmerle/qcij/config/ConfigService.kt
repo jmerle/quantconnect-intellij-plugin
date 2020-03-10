@@ -7,19 +7,19 @@ import java.util.UUID
 
 @State(name = "QuantConnectConfig")
 class ConfigService(project: Project) : PersistentStateComponent<ConfigService.State> {
-    class State {
+    data class State(
         // An arbitrary project-specific id which is persistent even when the project is renamed
-        var projectId = ""
+        var projectId: String = "",
 
         // QuantConnect project id -> timestamp (Epoch seconds) of when a file in it was last modified locally
-        var syncedProjects = mutableMapOf<Int, Long>()
+        var syncedProjects: MutableMap<Int, Long> = mutableMapOf(),
 
         // File path relative to project root -> timestamp (Epoch seconds) it was last modified
-        var syncedFiles = mutableMapOf<String, Long>()
+        var syncedFiles: MutableMap<String, Long> = mutableMapOf(),
 
         // QuantConnect project id -> root path relative to the project
-        var projectRoots = mutableMapOf<Int, String>()
-    }
+        var projectRoots: MutableMap<Int, String> = mutableMapOf()
+    )
 
     private var state = State()
 
@@ -45,9 +45,6 @@ class ConfigService(project: Project) : PersistentStateComponent<ConfigService.S
     }
 
     override fun loadState(newState: State) {
-        state.projectId = newState.projectId
-        state.syncedProjects = newState.syncedProjects
-        state.syncedFiles = newState.syncedFiles
-        state.projectRoots = newState.projectRoots
+        state = newState
     }
 }

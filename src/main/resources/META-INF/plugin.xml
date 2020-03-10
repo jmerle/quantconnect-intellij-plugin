@@ -19,7 +19,7 @@
         <projectService serviceImplementation="com.jaspervanmerle.qcij.api.APIService"/>
         <projectService serviceImplementation="com.jaspervanmerle.qcij.sync.SyncService"/>
 
-        <projectConfigurable instance="com.jaspervanmerle.qcij.config.ConfigConfigurable" groupId="tools"/>
+        <projectConfigurable instance="com.jaspervanmerle.qcij.config.QuantConnectConfigurable" groupId="tools"/>
 
         <postStartupActivity implementation="com.jaspervanmerle.qcij.project.ProjectStartupActivity"/>
     </extensions>

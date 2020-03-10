@@ -7,7 +7,7 @@ import com.jaspervanmerle.qcij.api.model.QuantConnectCredentials
 import com.jaspervanmerle.qcij.ui.SettingsPanel
 import javax.swing.JComponent
 
-class ConfigConfigurable(project: Project) : Configurable {
+class QuantConnectConfigurable(project: Project) : Configurable {
     private val credentialsService = project.service<CredentialsService>()
 
     private val settingsPanel = SettingsPanel()
