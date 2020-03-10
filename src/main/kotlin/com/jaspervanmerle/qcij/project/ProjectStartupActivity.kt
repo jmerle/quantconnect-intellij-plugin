@@ -22,10 +22,9 @@ class ProjectStartupActivity : StartupActivity {
 
         project.messageBus.connect().subscribe(VirtualFileManager.VFS_CHANGES, object : BulkFileListener {
             override fun after(events: MutableList<out VFileEvent>) {
-                for (event in events) {
-                    if (event.file == null) continue
-                    if (!projectManager.fileIndex.isInContent(event.file!!)) continue
-                    syncService.processEvent(event)
+                val projectEvents = events.filter { it.file != null && projectManager.fileIndex.isInContent(it.file!!) }
+                if (projectEvents.isNotEmpty()) {
+                    syncService.processEvents(projectEvents)
                 }
             }
         })

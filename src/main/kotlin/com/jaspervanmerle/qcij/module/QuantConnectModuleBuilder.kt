@@ -20,6 +20,8 @@ class QuantConnectModuleBuilder : ModuleBuilder() {
     override fun setupRootModel(modifiableRootModel: ModifiableRootModel) {
         val credentialsService = modifiableRootModel.project.service<CredentialsService>()
         credentialsService.setCredentials(userId, apiToken)
+
+        doAddContentEntry(modifiableRootModel)
     }
 
     override fun getCustomOptionsStep(context: WizardContext?, parentDisposable: Disposable?): ModuleWizardStep? {

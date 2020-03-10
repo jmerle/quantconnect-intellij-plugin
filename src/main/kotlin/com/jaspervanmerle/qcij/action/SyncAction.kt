@@ -1,12 +1,11 @@
 package com.jaspervanmerle.qcij.action
 
+import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
-import com.jaspervanmerle.qcij.Notifications
+import com.jaspervanmerle.qcij.sync.SyncTask
 
 class SyncAction : ProjectAction() {
     override fun execute(project: Project) {
-        // TODO(jmerle): Implement
-
-        Notifications.info("Sync project", project)
+        ProgressManager.getInstance().run(SyncTask(project))
     }
 }
