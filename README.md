@@ -1,5 +1,7 @@
 # QuantConnect IntelliJ Plugin
 
+# Deprecated while in-development in favor of [jmerle/quantconnect-cli](https://github.com/jmerle/quantconnect-cli).
+
 [![Build Status](https://dev.azure.com/jmerle/quantconnect-intellij-plugin/_apis/build/status/Build?branchName=master)](https://dev.azure.com/jmerle/quantconnect-intellij-plugin/_build/latest?definitionId=24&branchName=master)
 
 QuantConnect IntelliJ Plugin is an unofficial QuantConnect plugin for IntelliJ-based IDE's like Rider and PyCharm which provides tight integration between the IDE and QuantConnect. Its main features are file syncing and running backtests from inside the IDE.
